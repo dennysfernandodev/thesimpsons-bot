@@ -37,7 +37,7 @@ const registrar = JSON.parse(fs.readFileSync('./arquivos/users.json'));
 ╰══• ೋ•✧๑♡๑✧•ೋ •══╯
 INFORMAÇÕES*/
 var { antipv, antipv2, antipv3, visualizarmsg, numero_dono1, numero_dono2, numero_dono3, numero_dono4, numero_dono5, numero_dono6, msgantipv1, msgantipv2, API_KEY_INVERTEXTO } = require("./settings/nescessario.json");
-const music = JSON.parse(fs.readFileSync("./database/data/music.json"))
+const music = JSON.parse(fs.readFileSync("./database/data/music.json"));
 //*:◇:*:◆:*:◇:*:◆:*:◇:*:◆:*:◇:*::*-------
 const { fundo1, fundo2, imgnazista, imggay, imgcorno, imgfeio, imgvesgo, imgbebado, imggado, matarcmd, deathcmd, beijocmd, chutecmd, tapacmd, rnkgay, rnkgado, rnkcorno, rnkgostoso, rnkgostosa, rnknazista, rnkotaku, rnkpau, suruba, minado_bomb,sococmd,brigacmd,batercmd } = require("./settings/links_img.json");
 //*:◇:*:◆:*:◇:*:◆:*:◇:*:◆:*:◇:*::*-------
