@@ -179,7 +179,7 @@ var Procurar_String = info.message?.conversation || info.message?.viewOnceMessag
 
 const args = body ? body.trim().split(/ +/).slice(1) : [];
 
-const budy2 = body.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+const budy2 = (body || "").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
 if(isGroup && fs.existsSync(`./database/grupos/activation_gp/${from}.json`) && jsonGp[0].multiprefix) {
 var prefix = jsonGp[0]?.prefixos[jsonGp[0]?.prefixos?.indexOf(String(body)?.trim()?.charAt(0))] || jsonGp[0].prefixos[0]
@@ -191,7 +191,7 @@ var prefix = setting.prefix;
 var prefix = setting.prefix
 };
 
-var isCmd = body.trim().startsWith(prefix);
+var isCmd = (body || "").trim().startsWith(prefix);
 
 const command = isCmd ? budy2.trim().slice(1).split(/ +/).shift().toLocaleLowerCase(): null;
 
@@ -218,12 +218,12 @@ const sender = isGroup && info.key.participant ? (info.key.participant.includes(
 
 const messagesC = PR_String.slice(0).trim().split(/ +/).shift().toLowerCase();
 
-const arg = body.substring(body.indexOf(' ') + 1);
+const arg = (body || "").substring((body || "").indexOf(' ') + 1);
 
 const botNumber = await client.user.id.split(':')[0]+'@s.whatsapp.net';
-const argss = body.split(/ +/g);
-const testat = body;
-const ants = body;
+const argss = (body || "").split(/ +/g);
+const testat = body || "";
+const ants = body || "";
 
 const groupDesc = isGroup ? groupMetadata.desc : ''
 
@@ -12856,7 +12856,7 @@ reply(e)
 }
 }
 }
-if (body.toLowerCase() === 'simpsons' || body.toLowerCase() === 'prefixo') {
+if (((body || "").toLowerCase()) === 'simpsons' || ((body || "").toLowerCase()) === 'prefixo') {
 const menuSemPrefixo = `  ~🛋️~🛋️~🛋️~🛋️~🛋️~🛋️~
      *THE SIMPSONS BOT*
   ~🛋️~🛋️~🛋️~🛋️~🛋️~🛋️~
@@ -12910,7 +12910,7 @@ break;`.trim();
  return reply('```js\n' + estrutura + '\n```');
 }
 
-if (body.toLowerCase().startsWith('simpsons bot')) { // Comando de IA - Premium Only
+if (((body || "").toLowerCase()).startsWith('simpsons bot')) { // Comando de IA - Premium Only
 const q = body.slice('simpsons bot'.length).trim(); 
 const pushname = info?.pushName || sender?.split('@')[0];
 
@@ -13035,7 +13035,7 @@ return;
 }
 
 // Comando: Simpsons analisar imagem (Premium)
-if (body.toLowerCase().startsWith('simpsons analisar') || body.toLowerCase().startsWith('Simpsons descrever')) {
+if (((body || "").toLowerCase()).startsWith('simpsons analisar') || ((body || "").toLowerCase()).startsWith('Simpsons descrever')) {
    const pushname = info?.pushName || sender?.split('@')[0];
    
    // Verificação de usuário premium
@@ -13087,7 +13087,7 @@ if (body.toLowerCase().startsWith('simpsons analisar') || body.toLowerCase().sta
 }
 
 // Comando: Simpsons criar imagem (Premium) - API Externa
-if (body.toLowerCase().startsWith('simpsons criar imagem ')) {
+if (((body || "").toLowerCase()).startsWith('simpsons criar imagem ')) {
    const prompt = body.slice(17); // Remove "Simpsons criar imagem "
    const pushname = info?.pushName || sender?.split('@')[0];
    
@@ -13299,7 +13299,7 @@ reply("D'oh! A antena caiu. Tente sintonizar outro vídeo!");
 return;
 }
 
-if (body.toLowerCase().startsWith('simpsons fazer figurinha ')) {
+if (((body || "").toLowerCase()).startsWith('simpsons fazer figurinha ')) {
 let q = body.slice('simpsons fazer figurinha '.length).trim(); 
 const pushname = info?.pushName || sender?.split('@')[0];
 if (!q) return reply(`  ~🎨~ *ARTE DO BART* ~🎨~\n\n_Ay, caramba!_ Diga o que você quer que eu piche na parede!\n\n*Exemplo de uso:*\n> Simpsons fazer figurinha de gato rosa`);
@@ -13382,7 +13382,7 @@ client.sendMessage(from, {text: mess.permissionDenied_rUser()})
 }
 }
 
-if (body.toLowerCase() === 'simpsons' || body.toLowerCase() === 'prefixo') {
+if (((body || "").toLowerCase()) === 'simpsons' || ((body || "").toLowerCase()) === 'prefixo') {
 const menuSemPrefixo = `  ~🍩~🍩~🍩~🍩~🍩~🍩~
     *QUAL É O PREFIXO?*
   ~🍩~🍩~🍩~🍩~🍩~🍩~
@@ -13402,7 +13402,7 @@ await client.sendMessage(from, { image: { url: imagemMenu },
 caption: menuSemPrefixo });
 }
 
-if (body.toLowerCase().startsWith('oracao')) {
+if (((body || "").toLowerCase()).startsWith('oracao')) {
 const tema = body.slice(7).trim();
 if (!tema) return reply(`🙏 Digite o tema da oração.\nExemplo: oracao fé`);
 try {
