@@ -23681,8 +23681,8 @@
       {
         "id": "556194333182@s.whatsapp.net",
         "messages": 198,
-        "cmd_messages": 37,
-        "aparelho": "WhatsApp Web",
+        "cmd_messages": 38,
+        "aparelho": "Android",
         "figus": 8
       },
       {
@@ -23905,9 +23905,9 @@
       {
         "id": "258845413085@s.whatsapp.net",
         "messages": 11,
-        "cmd_messages": 3,
+        "cmd_messages": 4,
         "aparelho": "Android",
-        "figus": 1
+        "figus": 2
       }
     ]
   },
@@ -29441,7 +29441,7 @@
       },
       {
         "id": "553196492792@s.whatsapp.net",
-        "messages": 397,
+        "messages": 398,
         "cmd_messages": 0,
         "aparelho": "Android",
         "figus": 135
@@ -30974,7 +30974,7 @@
       },
       {
         "id": "558587816560@s.whatsapp.net",
-        "messages": 30,
+        "messages": 31,
         "cmd_messages": 0,
         "aparelho": "Android",
         "figus": 11

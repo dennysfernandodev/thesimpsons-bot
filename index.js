@@ -41,7 +41,7 @@ const music = JSON.parse(fs.readFileSync("./database/data/music.json"))
 //*:◇:*:◆:*:◇:*:◆:*:◇:*:◆:*:◇:*::*-------
 const { fundo1, fundo2, imgnazista, imggay, imgcorno, imgfeio, imgvesgo, imgbebado, imggado, matarcmd, deathcmd, beijocmd, chutecmd, tapacmd, rnkgay, rnkgado, rnkcorno, rnkgostoso, rnkgostosa, rnknazista, rnkotaku, rnkpau, suruba, minado_bomb,sococmd,brigacmd,batercmd } = require("./settings/links_img.json");
 //*:◇:*:◆:*:◇:*:◆:*:◇:*:◆:*:◇:*::*-------
-const { NomeDoBot, NickDono, Emoji, prefix, DENNYS_API ,DENNYS_KEY ,nomeLoja, donoloja } = require("./settings/config.json");
+const { NomeDoBot, NickDono, Emoji, prefix, DENNYS_API, DENNYS_KEY, nomeLoja, donoloja } = require("./settings/config.json");
 //*:◇:*:◆:*:◇:*:◆:*:◇:*:◆:*:◇:*::*-------
 const { audio_menu, bom_dia, boa_tarde, boa_noite, corno, qviado } = require('./settings/media/audios.json')
 const { logomenu } = require('./settings/loja.json');
@@ -6619,7 +6619,7 @@ case 'playdoc': // THE SIMPSONS BOT by Obrabo DEV
     try {
         if (!q) return reply("Precisa de um documento? Diga o nome da música, seu Zé Ruela!");
         await reply('Procurando nos arquivos do Diretor Skinner...');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res?.status || !Array.isArray(res.resultado) || res.resultado.length === 0)
             return reply("Pior que não achei! Nem na loja de discos do Comic Book Guy.");
         const video = res.resultado.find(v => v.type === 'video');
@@ -6640,7 +6640,7 @@ case 'playdoc': // THE SIMPSONS BOT by Obrabo DEV
         const fundo = 'https://i.imgur.com/FUsmFrf.jpeg';
         const canvasUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(fundo)}&text1=RELATORIO%20ESCOLAR&text2=${encodeURIComponent(video.title)}&text3=Duracao:%20${encodeURIComponent(video.duration?.timestamp || '0:00')}&avatar=${encodeURIComponent(video.thumbnail || video.image)}`;
         await client.sendMessage(from, { image: { url: canvasUrl }, caption: mensagem }, { quoted: info });
-        const audioUrl = `${BLACKOUT_API}/api/download/play?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+        const audioUrl = `${DENNYS_API}/api/download/play?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
         await client.sendMessage(from, { document: { url: audioUrl }, mimetype: 'audio/mpeg', fileName: `${video.title}.mp3` }, { quoted: info });
     } catch (e) {
         console.error("Erro no playdoc:", e);
@@ -6656,7 +6656,7 @@ case 'ytmp3': // THE SIMPSONS BOT by Obrabo DEV
     const parametro = isURL ? `url=${encodeURIComponent(cleanUrl)}` : `nome=${encodeURIComponent(q)}`;
     try {
         await client.sendMessage(from, {
-                audio: { url: `${BLACKOUT_API}/api/download/play?${parametro}&apikey=${BLACKOUT_KEY}` },
+                audio: { url: `${DENNYS_API}/api/download/play?${parametro}&apikey=${DENNYS_KEY}` },
                 fileName: `audio.mp3`,
                 mimetype: "audio/mpeg"
             }, { quoted: info }
@@ -6671,7 +6671,7 @@ case 'playmix': // THE SIMPSONS BOT by Obrabo DEV
     try {
         if (!q) return reply("Quer um mix? Diga o nome da música ou artista, seu Zé Ruela!");
         await reply('Woo hoo! Preparando um mix mais legal que a fita de trotes do Bart!');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res?.status || !Array.isArray(res.resultado) || res.resultado.length === 0)
             return reply("Pior que não achei! Nem na loja de discos do Comic Book Guy.");
         const audios = res.resultado.filter(v => v.type === 'video').slice(0, 10);
@@ -6687,7 +6687,7 @@ case 'playmix': // THE SIMPSONS BOT by Obrabo DEV
             const fundo = 'https://i.imgur.com/BecQ61A.jpeg';
             const canvasUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(fundo)}&text1=MIX%20DO%20BART&text2=${encodeURIComponent(video.title)}&text3=Faixa%20${i+1}&avatar=${encodeURIComponent(video.thumbnail || video.image)}`;
             await client.sendMessage(from, { image: { url: canvasUrl }, caption: mensagem }, { quoted: info });
-            const audioUrl = `${BLACKOUT_API}/api/download/play?nome=${encodeURIComponent(video.url)}&apikey=${BLACKOUT_KEY}`;
+            const audioUrl = `${DENNYS_API}/api/download/play?nome=${encodeURIComponent(video.url)}&apikey=${DENNYS_KEY}`;
             await client.sendMessage(from, { audio: { url: audioUrl }, mimetype: 'audio/mpeg', fileName: `${video.title}.mp3` }, { quoted: info });
             await sleep(1000);
         }
@@ -6701,7 +6701,7 @@ case 'playvideo': { // THE SIMPSONS BOT by Obrabo DEV
     try {
         if (!q) return reply("D'oh! Diga o nome do vídeo que você quer ver na TV!");
         await reply('Sintonizando o Canal 6... Não mude de canal!');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res?.status || !Array.isArray(res.resultado) || res.resultado.length === 0)
             return reply("D'oh! Não achei esse vídeo nem nas fitas velhas do Vovô.");
         const video = res.resultado.find(v => v.type === 'video');
@@ -6718,7 +6718,7 @@ case 'playvideo': { // THE SIMPSONS BOT by Obrabo DEV
 │
 └─ Woo hoo! by Obrabo DEV ─┘`.trim();
         await client.sendMessage(from, { image: { url: video.thumbnail || video.image }, caption: mensagem }, { quoted: info });
-        const videoUrl = `${BLACKOUT_API}/api/download/playvd?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+        const videoUrl = `${DENNYS_API}/api/download/playvd?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
         await client.sendMessage(from, { video: { url: videoUrl }, mimetype: 'video/mp4', fileName: `${video.title}.mp4` }, { quoted: info });
     } catch (e) {
         console.error("Erro no playvideo:", e);
@@ -6731,7 +6731,7 @@ case 'playvideo2': { // THE SIMPSONS BOT by Obrabo DEV
     try {
         if (!q) return reply("D'oh! Diga o nome do vídeo que você quer ver na TV!");
         await reply('Sintonizando o Canal 6... Não mude de canal!');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res?.status || !Array.isArray(res.resultado) || res.resultado.length === 0)
             return reply("D'oh! Não achei esse vídeo nem nas fitas velhas do Vovô.");
         const video = res.resultado.find(v => v.type === 'video');
@@ -6750,7 +6750,7 @@ case 'playvideo2': { // THE SIMPSONS BOT by Obrabo DEV
         const fundo = 'https://i.imgur.com/nAPrnNo.jpeg';
         const canvasUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(fundo)}&text1=CANAL%206&text2=${encodeURIComponent(video.title)}&text3=Duracao:%20${encodeURIComponent(video.duration?.timestamp || '0:00')}&avatar=${encodeURIComponent(video.thumbnail || video.image)}`;
         await client.sendMessage(from, { image: { url: canvasUrl }, caption: mensagem }, { quoted: info });
-        const videoUrl = `${BLACKOUT_API}/api/download/playvd?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+        const videoUrl = `${DENNYS_API}/api/download/playvd?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
         await client.sendMessage(from, { video: { url: videoUrl }, mimetype: 'video/mp4', fileName: `${video.title}.mp4` }, { quoted: info });
     } catch (e) {
         console.error("Erro no playvideo2:", e);
@@ -6763,7 +6763,7 @@ case 'playdocvideo': { // THE SIMPSONS BOT by Obrabo DEV
     try {
         if (!q) return reply("Precisa de um documento de vídeo? Diga o nome, seu Zé Ruela!");
         await reply('Procurando nos arquivos do Diretor Skinner...');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res?.status || !Array.isArray(res.resultado) || res.resultado.length === 0)
             return reply("Pior que não achei! Nem na loja de discos do Comic Book Guy.");
         const video = res.resultado.find(v => v.type === 'video');
@@ -6783,7 +6783,7 @@ case 'playdocvideo': { // THE SIMPSONS BOT by Obrabo DEV
         const fundo = 'https://i.imgur.com/u6RjcMD.jpeg';
         const canvasUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(fundo)}&text1=RELATORIO%20ESCOLAR&text2=${encodeURIComponent(video.title)}&text3=Duracao:%20${encodeURIComponent(video.duration?.timestamp || '0:00')}&avatar=${encodeURIComponent(video.thumbnail || video.image)}`;
         await client.sendMessage(from, { image: { url: canvasUrl }, caption: mensagem }, { quoted: info });
-        const videoDocUrl = `${BLACKOUT_API}/api/download/playvd?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+        const videoDocUrl = `${DENNYS_API}/api/download/playvd?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
         await client.sendMessage(from, { document: { url: videoDocUrl }, mimetype: 'video/mp4', fileName: `${video.title}.mp4` }, { quoted: info });
     } catch (e) {
         console.error("Erro no playdocvideo:", e);
@@ -6796,7 +6796,7 @@ case 'playmixvid': { // THE SIMPSONS BOT by Obrabo DEV
     try {
         if (!q) return reply("Quer um mix de vídeos? Diga o nome, seu Zé Ruela!");
         await reply('Woo hoo! Preparando uma maratona de Comichão e Coçadinha!');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res?.status || !Array.isArray(res.resultado) || res.resultado.length === 0)
             return reply("Pior que não achei! Nem na loja de discos do Comic Book Guy.");
         const videos = res.resultado.filter(v => v.type === 'video').slice(0, 5);
@@ -6811,7 +6811,7 @@ case 'playmixvid': { // THE SIMPSONS BOT by Obrabo DEV
             const fundo = 'https://i.imgur.com/ZwDIKbw.jpeg';
             const canvasUrl = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(fundo)}&text1=MARATONA&text2=${encodeURIComponent(video.title)}&text3=Duracao:%20${encodeURIComponent(video.duration?.timestamp || '0:00')}&avatar=${encodeURIComponent(video.thumbnail || video.image)}`;
             await client.sendMessage(from, { image: { url: canvasUrl }, caption: mensagem }, { quoted: info });
-            const videoUrl = `${BLACKOUT_API}/api/download/playvd?nome=${encodeURIComponent(video.url)}&apikey=${BLACKOUT_KEY}`;
+            const videoUrl = `${DENNYS_API}/api/download/playvd?nome=${encodeURIComponent(video.url)}&apikey=${DENNYS_KEY}`;
             await client.sendMessage(from, { video: { url: videoUrl }, mimetype: 'video/mp4', fileName: `${video.title}.mp4` }, { quoted: info });
             await delay(1500);
         }
@@ -6828,7 +6828,7 @@ case 'ytmp4': { // THE SIMPSONS BOT by Obrabo DEV
     const isURL = q.includes("youtube.com") || q.includes("youtu.be");
     const parametro = isURL ? `url=${encodeURIComponent(q)}` : `nome=${encodeURIComponent(q)}`;
     try {
-        const videoUrl = `${BLACKOUT_API}/api/download/playvd?${parametro}&apikey=${BLACKOUT_KEY}`;
+        const videoUrl = `${DENNYS_API}/api/download/playvd?${parametro}&apikey=${DENNYS_KEY}`;
         await client.sendMessage(from, { video: { url: videoUrl }, fileName: `video.mp4`, mimetype: "video/mp4" }, { quoted: info });
     } catch (e) {
         console.error("Erro ao baixar vídeo:", e);
@@ -6856,7 +6856,7 @@ case 'shazam': { // THE SIMPSONS BOT by Obrabo DEV
         const tituloDetectado = hasil.title || hasil.song || 'Desconhecido';
         const artista = hasil.artist || hasil.subtitle || 'Artista desconhecido';
         const capa = hasil.album?.cover || hasil.spotify?.album?.images?.[0]?.url || null;
-        const data = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(tituloDetectado)}&apikey=${BLACKOUT_KEY}`);
+        const data = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(tituloDetectado)}&apikey=${DENNYS_KEY}`);
         const video = data?.resultado?.[0];
         let thumbBuffer = null;
         if (capa) {
@@ -6879,7 +6879,7 @@ case 'shazam': { // THE SIMPSONS BOT by Obrabo DEV
             }, { quoted: info });
         }
         await client.sendMessage(from, {
-            audio: { url: `${BLACKOUT_API}/api/download/play?nome=${encodeURIComponent(tituloDetectado)}&apikey=${BLACKOUT_KEY}` },
+            audio: { url: `${DENNYS_API}/api/download/play?nome=${encodeURIComponent(tituloDetectado)}&apikey=${DENNYS_KEY}` },
             mimetype: 'audio/mpeg',
             ptt: false,
             jpegThumbnail: thumbBuffer || null
@@ -6906,7 +6906,7 @@ case 'transcricao': { // THE SIMPSONS BOT by Obrabo DEV
     if (!q) return reply(`Ay, caramba! Mande o link do vídeo do YouTube para a Lisa transcrever!\nExemplo: *${prefix + command} https://...*`);
     try {
         await reagir(from, '📝');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/transcricao?url=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/transcricao?url=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res || !res.status || !res.resultado || !res.resultado.transcript) {
             return reply("D'oh! Não consegui entender o que eles estão falando. Deve ser o sotaque do Vovô.");
         }
@@ -6926,7 +6926,7 @@ case 'tiktokvideo': case 'tktv': { // THE SIMPSONS BOT by Obrabo DEV
     if (!q) return reply(`Woo hoo! Mande o link do TikTok para eu baixar!\n\nExemplo: *${prefix + command} https://vm.tiktok.com/...*`);
     await reagir(from, '💃');
     try {
-        const urlAPI = `${BLACKOUT_API}/api/download/tiktok/video?url=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+        const urlAPI = `${DENNYS_API}/api/download/tiktok/video?url=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
         const res = await fetch(urlAPI);
         if (!res.ok || !res.headers.get("content-type")?.includes("video")) {
             return reply("D'oh! Não consegui baixar. Esse link é mais furado que uma rosquinha!");
@@ -6944,7 +6944,7 @@ case 'pensador': { // THE SIMPSONS BOT by Obrabo DEV
     if (!q) return reply(`Hmm, sobre o que você quer filosofar?\nExemplo: *${prefix + command} rosquinhas*`);
     try {
         await reagir(from, '🤔');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/pensadorPesquisa?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/pensadorPesquisa?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res || !res.status || !res.resultado || res.resultado.length === 0) {
             return reply("D'oh! Não achei nenhuma frase inteligente sobre isso. Nem a Lisa sabe.");
         }
@@ -6963,7 +6963,7 @@ case 'frasesdeamor': { // THE SIMPSONS BOT by Obrabo DEV
     if (!q) return reply(`Oh, Marge! Sobre o que você quer uma frase de amor?\nExemplo: *${prefix + command} rosquinhas*`);
     try {
         await reagir(from, '❤️');
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/frasesDeAmor?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/frasesDeAmor?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res || !res.status || !res.resultado || res.resultado.length === 0) {
             return reply("D'oh! Não achei nada romântico sobre isso. Tente 'cerveja'.");
         }
@@ -6982,7 +6982,7 @@ case 'playstore': { // THE SIMPSONS BOT by Obrabo DEV
     if (!q) return reply("Qual app você quer que o Comic Book Guy procure na Play Store?\nExemplo: *playstore The Simpsons: Tapped Out*");
     await reagir(from, "🤓");
     try {
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/playstore?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/playstore?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
         if (!res.status || !res.resultado?.resultado || res.resultado.resultado.length === 0)
             return reply("Pior. Pesquisa. De todas. Tente outro nome.");
         const apps = res.resultado.resultado;
@@ -7005,7 +7005,7 @@ break;
 case 'infoapi': { // THE SIMPSONS BOT by Obrabo DEV
     await reagir(from, "☢️");
     try {
-        const url = `${BLACKOUT_API}/api/userinfo?apikey=${BLACKOUT_KEY}`;
+        const url = `${DENNYS_API}/api/userinfo?apikey=${DENNYS_KEY}`;
         const res = await fetchJson(url);
         if (!res?.status || !res?.dados) {
             return reply("D'oh! Não achei seus dados. Você não deve ser o Mr. Burns.");
@@ -7015,7 +7015,7 @@ case 'infoapi': { // THE SIMPSONS BOT by Obrabo DEV
         const uptimeFormatado = `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m ${Math.floor(uptime % 60)}s`;
         const hora = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
         const dataAtual = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
-        const canvasUrl = `${BLACKOUT_API}/api/canva/bemVindo?` +
+        const canvasUrl = `${DENNYS_API}/api/canva/bemVindo?` +
             `titulo=${encodeURIComponent('PAINEL DE CONTROLE')}` +
             `&avatar=${encodeURIComponent(info.foto)}` +
             `&fundo=${encodeURIComponent('https://files.catbox.moe/2kexev.jpg')}` +
@@ -7058,7 +7058,7 @@ case 'pinterest': // THE SIMPSONS BOT by Obrabo DEV
         if (!q) return reply('Ay, caramba! Diga o que você quer que eu desenhe!');
         reply('Procurando meu giz de cera...');
         await client.sendMessage(from, {
-            image: { url: `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent(q)}` }
+            image: { url: `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent(q)}` }
         }, { quoted: info });
     } catch (error) {
         console.log(error);
@@ -7069,7 +7069,7 @@ break;
 case 'metadinha': { // THE SIMPSONS BOT by Obrabo DEV
     await reagir(from, "❤️");
     try {
-        const res = await fetchJson(`${BLACKOUT_API}/api/imagem/metadinha?apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/imagem/metadinha?apikey=${DENNYS_KEY}`);
         if (!res.masculina || !res.feminina) return reply("D'oh! Não consegui achar um par perfeito. Nem o Homer e a Marge.");
         await client.sendMessage(from, { image: { url: res.masculina }, caption: `_Para ele, como o Homer_ 🍩` }, { quoted: info });
         await client.sendMessage(from, { image: { url: res.feminina }, caption: `_Para ela, como a Marge_ 💙` }, { quoted: info });
@@ -7084,7 +7084,7 @@ case 'wallpaper': { // THE SIMPSONS BOT by Obrabo DEV
     if (!q) return reply(`D'oh! Diga o que você quer de papel de parede!\nExemplo: *${prefix + command} rosquinhas*`);
     await reagir(from, "🖼️");
     try {
-        const res = await fetchJson(`${BLACKOUT_API}/api/pesquisa/wallpaper?query=${q}&apikey=${BLACKOUT_KEY}`);
+        const res = await fetchJson(`${DENNYS_API}/api/pesquisa/wallpaper?query=${q}&apikey=${DENNYS_KEY}`);
         if (!res.status || !res.resultado || res.resultado.length === 0) return reply("Pior. Wallpaper. De todos. Tente outro nome.");
         for (let i = 0; i < res.resultado.length; i++) {
             const wallpaper = res.resultado[i];
@@ -7194,7 +7194,7 @@ try {
 const personagem = command.charAt(0).toUpperCase() + command.slice(1);
 await client.sendMessage(from, {
 image: {
-url: `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent(personagem)}`},caption: `Pior. Personagem. De todos. Mas aqui está sua imagem de *${personagem}*` }, { quoted: info });
+url: `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent(personagem)}`},caption: `Pior. Personagem. De todos. Mas aqui está sua imagem de *${personagem}*` }, { quoted: info });
 } catch (e) { console.log(" ERRO:", e);
 await reply("D'oh! Não achei esse personagem nem na loja de quadrinhos do Comic Book Guy.");
 }}
@@ -7206,7 +7206,7 @@ case 'memesanime': {
 try {
 await client.sendMessage(from, {
 image: {
-url: `${BLACKOUT_API}/api/imagem/animememe?apikey=${BLACKOUT_KEY}`}, caption: 'Ha-ha! O Nelson aprovaria essa piada.'}, { quoted: info });
+url: `${DENNYS_API}/api/imagem/animememe?apikey=${DENNYS_KEY}`}, caption: 'Ha-ha! O Nelson aprovaria essa piada.'}, { quoted: info });
 } catch (e) {
 console.log("ERRO ao buscar animeme:", e);
 await reply("D'oh! O meme não teve graça e não quis carregar.");
@@ -7230,7 +7230,7 @@ LOGOS TEXTO*/
 case 'travazapimg'://THE SIMPSONS BOT by Obrabo DEV
 try {
 reply('Ay, caramba! Procurando uma imagem para o seu trote...');
-const toshiruzresponse = await fetch(`${BLACKOUT_API}/api/imagem/travaZapImg?apikey=${BLACKOUT_KEY}`);
+const toshiruzresponse = await fetch(`${DENNYS_API}/api/imagem/travaZapImg?apikey=${DENNYS_KEY}`);
 const data = await toshiruzresponse.json();
 if (!data?.data?.imagemUrl) {
 return reply('D\'oh! Não achei nenhuma imagem para o seu trote.');
@@ -7246,7 +7246,7 @@ case 'criarimg'://THE SIMPSONS BOT by Obrabo DEV
 if (!q) return reply(`D'oh! Diga o que você quer que eu desenhe!\nExemplo: ${prefix + command} rosquinha rosa`);
 reply('_Pegando meu giz de cera... Não conte para a Marge!_');
 try {
-const toshiruzUrl = `${BLACKOUT_API}/api/ai/imagem/imagemAi?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const toshiruzUrl = `${DENNYS_API}/api/ai/imagem/imagemAi?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 await client.sendMessage(from, { image: { url: toshiruzUrl }, caption: `Woo hoo! Um desenho de: *${q}*` }, { quoted: seloMeta }); } catch (e) { console.error(e);
 reply("D'oh! Acabou a tinta amarela. Tente outra coisa!");
 }
@@ -7257,7 +7257,7 @@ case 'toshiruslogo'://THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`Qual texto você quer na sua logo anônima, seu Zé Roela?`);
 reply('Criando uma logo mais misteriosa que o Sr. Burns...');
-const logoUrl = `${BLACKOUT_API}/api/imagem/logo/logo?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const logoUrl = `${DENNYS_API}/api/imagem/logo/logo?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 await client.sendMessage(from, { image: { url: logoUrl },
 caption: `Aqui está sua logo anônima para: *${q}*` }, { quoted: seloGpt });
 } catch (err) { console.error('[ERRO LOGO]', err);
@@ -7270,7 +7270,7 @@ case 'toshiruslogo2'://THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`Qual texto você quer na sua logo espectro, seu Zé Roela?`);
 reply('Criando uma logo mais assustadora que o Vovô contando histórias...');
-const logoUrl = `${BLACKOUT_API}/api/imagem/logo/logo2?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const logoUrl = `${DENNYS_API}/api/imagem/logo/logo2?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 await client.sendMessage(from, { image: { url: logoUrl },
 caption: `Aqui está sua logo espectro para: *${q}*` }, { quoted: seloGpt });
 } catch (err) { console.error('[ERRO LOGO]', err);
@@ -7283,7 +7283,7 @@ case 'toshiruslogo2'://THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`Qual texto você quer na sua logo suweg, seu Zé Roela?`);
 reply('Criando uma logo no estilo do Pichei, digo, do Bart...');
-const logoUrl = `${BLACKOUT_API}/api/imagem/logo/logo3?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const logoUrl = `${DENNYS_API}/api/imagem/logo/logo3?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 await client.sendMessage(from, { image: { url: logoUrl },
 caption: `Aqui está sua logo suweg para: *${q}*` }, { quoted: seloGpt });
 } catch (err) { console.error('[ERRO LOGO]', err);
@@ -7296,7 +7296,7 @@ case 'toshiruslogo4'://THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`Qual texto você quer na sua logo hacker, seu Zé Roela?`);
 reply('Hackeando o sistema da escola... Digo, criando sua logo...');
-const logoUrl = `${BLACKOUT_API}/api/imagem/logo/logo4?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const logoUrl = `${DENNYS_API}/api/imagem/logo/logo4?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 await client.sendMessage(from, { image: { url: logoUrl },
 caption: `Aqui está sua logo hacker para: *${q}*` }, { quoted: seloGpt });
 } catch (err) { console.error('[ERRO LOGO]', err);
@@ -7309,7 +7309,7 @@ case 'toshiruslogo5'://THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`Qual texto você quer na sua logo trava, seu Zé Roela?`);
 reply('Criando uma logo mais travada que o cérebro do Homer...');
-const logoUrl = `${BLACKOUT_API}/api/imagem/logo/logo5?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const logoUrl = `${DENNYS_API}/api/imagem/logo/logo5?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 await client.sendMessage(from, { image: { url: logoUrl },
 caption: `Aqui está sua logo trava para: *${q}*` }, { quoted: seloGpt });
 } catch (err) { console.error('[ERRO LOGO]', err);
@@ -7532,7 +7532,7 @@ if (!signosValidos.includes(signoUser)) { return reply("D'oh! Isso não é um si
 }
 const blackoutapi = q.charAt(0).toUpperCase() + q.slice(1);
 await client.sendMessage(from, { image: {
-url: `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent("Signo " + blackoutapi)}`},caption: `Woo hoo! Uma imagem para o signo de *${blackoutapi}*`}, { quoted: info });
+url: `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent("Signo " + blackoutapi)}`},caption: `Woo hoo! Uma imagem para o signo de *${blackoutapi}*`}, { quoted: info });
 } catch (e) { console.log("ERRO NO COMANDO SIGNO:", e);
 await reply("D'oh! A bola de cristal da Lisa quebrou. Tente de novo.");
 }}
@@ -7566,9 +7566,9 @@ if (!cavaleiros[signoUser]) {
 return reply("D'oh! Isso não é um signo, seu Zé Roela!");
 }
 const cavaleiro = cavaleiros[signoUser];
-const ia = await fetchJson(`${BLACKOUT_API}/api/ai/texto/gemini?query=Conte a história do cavaleiro ${encodeURIComponent(cavaleiro)}&apikey=${BLACKOUT_KEY}`);
+const ia = await fetchJson(`${DENNYS_API}/api/ai/texto/gemini?query=Conte a história do cavaleiro ${encodeURIComponent(cavaleiro)}&apikey=${DENNYS_KEY}`);
 const descricao = ia?.resposta || "Pior. Cavaleiro. De todos.";
-await client.sendMessage(from, {image: { url: `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent(cavaleiro)}` },caption: `🛡️ *${cavaleiro}*\n\n${descricao}` }, { quoted: info });
+await client.sendMessage(from, {image: { url: `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent(cavaleiro)}` },caption: `🛡️ *${cavaleiro}*\n\n${descricao}` }, { quoted: info });
 } catch (e) { console.log("ERRO NO COMANDO SIGNO:", e);
 await reply("D'oh! O cosmo do meu bot falhou. Tente de novo.");
 }}
@@ -7855,7 +7855,7 @@ case 'comprarbot':
 case 'gitclone': {
 try {
 await reagir(from, "🤖");
-const ai = await fetchJson(`${BLACKOUT_API}/api/ai/texto/gemini?query=Venda um bot de WhatsApp de forma inteligente, destacando que é totalmente atualizado, com comando de IA, loja, grupo, login e painel web, ideal para revenda. E incentive a falar com o dono no final.&apikey=${BLACKOUT_KEY}`);
+const ai = await fetchJson(`${DENNYS_API}/api/ai/texto/gemini?query=Venda um bot de WhatsApp de forma inteligente, destacando que é totalmente atualizado, com comando de IA, loja, grupo, login e painel web, ideal para revenda. E incentive a falar com o dono no final.&apikey=${DENNYS_KEY}`);
 const mensagemIA = ai?.resposta || "Woo hoo! Este bot é mais esperto que a Lisa!";
 await client.sendMessage(from, { image: { url: "./menu/menu.jpeg" },
 caption: `  ~💰~ *PAGAMENTO DO BOT* ~💰~
@@ -7937,9 +7937,9 @@ case 'serie': { // THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`D'oh! Diga o nome da série!\nExemplo: ${prefix + command} Comichão e Coçadinha`);
 const serie = q.trim();
-const respostaIA = await fetchJson(`${BLACKOUT_API}/api/ai/texto/gemini?query=Conte um spoiler da série ${encodeURIComponent(serie)}&apikey=${BLACKOUT_KEY}`);
+const respostaIA = await fetchJson(`${DENNYS_API}/api/ai/texto/gemini?query=Conte um spoiler da série ${encodeURIComponent(serie)}&apikey=${DENNYS_KEY}`);
   const spoiler = respostaIA?.resposta || "Pior. Spoiler. De todos.";
-await client.sendMessage(from, { image: { url: `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent(serie)}`
+await client.sendMessage(from, { image: { url: `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent(serie)}`
 },
 caption: `🎞️ *${serie}*\n\n🧨 *Spoiler:* ${spoiler}` }, { quoted: info });
 } catch (e) { console.log("ERRO NO COMANDO SERIE:", e);
@@ -7951,10 +7951,10 @@ case 'filme': { // THE SIMPSONS BOT by Obrabo DEV
 try {
   if (!q) return reply(`D'oh! Diga o nome do filme!\nExemplo: ${prefix + command} O Homem Radioativo`);
 const filme = q.trim();
-const respostaIA = await fetchJson(`${BLACKOUT_API}/api/ai/texto/gemini?query=Conte um spoiler do filme ${encodeURIComponent(filme)}&apikey=${BLACKOUT_KEY}`);
+const respostaIA = await fetchJson(`${DENNYS_API}/api/ai/texto/gemini?query=Conte um spoiler do filme ${encodeURIComponent(filme)}&apikey=${DENNYS_KEY}`);
 const spoiler = respostaIA?.resposta || "Pior. Spoiler. De todos.";
 await client.sendMessage(from, { image: {
-url: `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent("Filme " + filme)}`
+url: `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent("Filme " + filme)}`
 },
 caption: `🎬 *${filme}*\n\n🧨 *Spoiler:* ${spoiler}` }, { quoted: info });
 } catch (e) { console.error("ERRO NO COMANDO FILME:", e);
@@ -7966,12 +7966,12 @@ case 'otakuanime': { // THE SIMPSONS BOT by Obrabo DEV
 try {
 if (!q) return reply(`Pior. Anime. De todos. Diga o nome!\nExemplo: ${prefix + command} Pokémon`);
 const anime = q.trim();
-const dados = await fetchJson(`${BLACKOUT_API}/api/pesquisa/animeinfo?nome=${encodeURIComponent(anime)}&apikey=${BLACKOUT_KEY}`);
+const dados = await fetchJson(`${DENNYS_API}/api/pesquisa/animeinfo?nome=${encodeURIComponent(anime)}&apikey=${DENNYS_KEY}`);
 if (!dados || dados.status === false) return reply("D'oh! Não achei esse anime nem na loja de quadrinhos do Comic Book Guy.");
 const { titulo, lancamento, episodio, sinopse } = dados;
-const ia = await fetchJson(`${BLACKOUT_API}/api/ai/texto/gemini?query=Conte um spoiler do anime ${encodeURIComponent(anime)}&apikey=${BLACKOUT_KEY}`);
+const ia = await fetchJson(`${DENNYS_API}/api/ai/texto/gemini?query=Conte um spoiler do anime ${encodeURIComponent(anime)}&apikey=${DENNYS_KEY}`);
 const spoiler = ia?.resposta || "Pior. Spoiler. De todos.";
-const imagemUrl = `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent("Anime " + anime)}`;
+const imagemUrl = `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent("Anime " + anime)}`;
 await client.sendMessage(from, { image: { url: imagemUrl }, caption:
 `📺 *${titulo || anime}*
 📅 *Lançamento:* ${lancamento || "Desconhecida"}
@@ -9638,7 +9638,7 @@ case 'stickeria': // THE SIMPSONS BOT by Obrabo DEV
 if (!q) return reply(`D'oh! Diga o que você quer que eu desenhe!\nExemplo: ${prefix + command} Homer comendo uma rosquinha`);
 reply('Procurando meu giz de cera... Não conte para a Marge!');
 try {
-const toshiruzUrl = `${BLACKOUT_API}/api/ai/imagem/imagemAi?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const toshiruzUrl = `${DENNYS_API}/api/ai/imagem/imagemAi?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 const response = await axios.get(toshiruzUrl, { responseType: 'arraybuffer' });
 const buffer = Buffer.from(response.data, 'binary');
 const tempDir = './temp';
@@ -9670,7 +9670,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10, senão o Homer come todas!");}
 async function toshiruz() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_emoji?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_emoji?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruz();
 await sleep(680);}}
@@ -9683,7 +9683,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10, senão o Homer come todas!");}
 async function toshiruzfigu() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_roblox?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_roblox?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzfigu();
 await sleep(680);}}
@@ -9696,7 +9696,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10, senão o Homer come todas!");}
 async function toshiruzfig() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_memes2?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_memes2?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzfig();
 await sleep(680);}}
@@ -9709,7 +9709,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10, senão a Maggie chora!");}
 async function toshiruzfi() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_bebe?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_bebe?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzfi();
 await sleep(680);}}
@@ -9722,7 +9722,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10, senão o Homer come todas!");}
 async function lovetoshiruz() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_coreana?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_coreana?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await lovetoshiruz();
 await sleep(680);}}
@@ -9735,7 +9735,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10, senão o Homer come todas!");}
 async function lovetoshiruz() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_coreanas2?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_coreanas2?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await lovetoshiruz();
 await sleep(680);}}
@@ -9748,7 +9748,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Pior. Quantidade. De todas. No máximo 10!");}
 async function toshiruzprasempre() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_anime2?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_anime2?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzprasempre();
 await sleep(680);}}
@@ -9763,7 +9763,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10!");}
 async function toshiruzaniversario() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu+18?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu+18?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzaniversario();
 await sleep(680);}}
@@ -9776,7 +9776,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10!");}
 async function toshiruzaniversari() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_animais?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_animais?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzaniversari();
 await sleep(680);}}
@@ -9789,7 +9789,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10!");}
 async function toshiruzaniversar() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_desenho?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_desenho?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzaniversar();
 await sleep(680);}}
@@ -9802,7 +9802,7 @@ if (!quantidade || quantidade > 10) {
 return reply("Ay, caramba! No máximo 10!");}
 async function toshiruzaniversa() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}/sticker/figu_aleatori?apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}/sticker/figu_aleatori?apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { 
 await toshiruzaniversa();
 await sleep(680);}}
@@ -9820,7 +9820,7 @@ texto = partes.slice(1).join(" ");
 if (!texto) return reply("D'oh! Diga o que desenhar depois do número!");}
 async function gerarStickerIA() {
 await client.sendMessage(from, {
-sticker: { url: `${BLACKOUT_API}api/ai/sticker/stickAi?query=${encodeURIComponent(texto)}&apikey=${BLACKOUT_KEY}` }}, { quoted: seloMeta });}
+sticker: { url: `${DENNYS_API}api/ai/sticker/stickAi?query=${encodeURIComponent(texto)}&apikey=${DENNYS_KEY}` }}, { quoted: seloMeta });}
 for (let i = 0; i < quantidade; i++) { await gerarStickerIA();
 await sleep(680);
 }}
@@ -12959,16 +12959,16 @@ resposta = data.candidates[0].content.parts[0].text;
 console.log('Gemini API indisponível, tentando fallback...');
 }
 
-// Fallback para API Blackout se Gemini falhar
+// Fallback para API DENNYS se Gemini falhar
 if (!resposta) {
 const query = encodeURIComponent(q);
-let url = `${BLACKOUT_API}/api/ai/texto/gemini?query=${query}&apikey=${BLACKOUT_KEY}`;
+let url = `${DENNYS_API}/api/ai/texto/gemini?query=${query}&apikey=${DENNYS_KEY}`;
 let res = await fetch(url);
 let data = await res.json();
 
 // Se falhar, tentar ChatGPT
 if (!data || !data.status || (!data.resposta && !data.resultado)) {
-url = `${BLACKOUT_API}/api/ai/texto/chatgpt?query=${query}&apikey=${BLACKOUT_KEY}`;
+url = `${DENNYS_API}/api/ai/texto/chatgpt?query=${query}&apikey=${DENNYS_KEY}`;
 res = await fetch(url);
 data = await res.json();
 fonte = "Professor Frink AI";
@@ -13153,8 +13153,8 @@ renderLargerThumbnail: true
 }, { quoted: seloMeta });
 
 try {
-// Tentativa principal com Blackout API
-const data = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+// Tentativa principal com DENNYS API
+const data = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
 const video = data?.resultado?.resultado?.[0]; 
 
 if (!video) {
@@ -13171,7 +13171,7 @@ const videoDuration = ytVideo.timestamp || 'Duração desconhecida';
 const videoUrl = ytVideo.url || '';
 
 await client.sendMessage(from, { 
-audio: { url: `${BLACKOUT_API}/api/download/play?nome=${encodeURIComponent(videoUrl)}&apikey=${BLACKOUT_KEY}` },
+audio: { url: `${DENNYS_API}/api/download/play?nome=${encodeURIComponent(videoUrl)}&apikey=${DENNYS_KEY}` },
 fileName: `${videoTitle}.mp3`,
 mimetype: "audio/mpeg",
 contextInfo: {
@@ -13186,14 +13186,14 @@ sourceUrl: videoUrl
 }, { quoted: seloMeta });
 
 } else {
-// Usando resultado da Blackout API
+// Usando resultado da DENNYS API
 const videoTitle = video.title || 'Título desconhecido';
 const videoImage = video.image || 'https://i.postimg.cc/bv9D4BNY/The-Simpson.jpg';
 const videoDuration = video.timestamp || 'Duração desconhecida';
 const videoUrl = video.url || '';
 
 await client.sendMessage(from, { 
-audio: { url: `${BLACKOUT_API}/api/download/play?nome=${encodeURIComponent(videoUrl)}&apikey=${BLACKOUT_KEY}` },
+audio: { url: `${DENNYS_API}/api/download/play?nome=${encodeURIComponent(videoUrl)}&apikey=${DENNYS_KEY}` },
 fileName: `${videoTitle}.mp3`,
 mimetype: "audio/mpeg",
 contextInfo: {
@@ -13235,8 +13235,8 @@ renderLargerThumbnail: true
 }, { quoted: seloMeta });
 
 try {
-// Tentativa principal com Blackout API
-const data = await fetchJson(`${BLACKOUT_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`);
+// Tentativa principal com DENNYS API
+const data = await fetchJson(`${DENNYS_API}/api/pesquisa/youtube?nome=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`);
 const video = data?.resultado?.resultado?.[0]; 
 
 if (!video) {
@@ -13253,7 +13253,7 @@ const videoDuration = ytVideo.timestamp || 'Duração desconhecida';
 const videoUrl = ytVideo.url || '';
 
 await client.sendMessage(from, {
-video: { url: `${BLACKOUT_API}/api/download/playvd?nome=${encodeURIComponent(videoUrl)}&apikey=${BLACKOUT_KEY}` },
+video: { url: `${DENNYS_API}/api/download/playvd?nome=${encodeURIComponent(videoUrl)}&apikey=${DENNYS_KEY}` },
 fileName: `${videoTitle}.mp4`,
 mimetype: "video/mp4",
 caption: `🎬 *${videoTitle}*\n⏱️ *Duração:* ${videoDuration}\n👤 *Pedido por:* ${pushname}\n\n_Woo hoo! Pipoca!_`,
@@ -13269,14 +13269,14 @@ sourceUrl: videoUrl
 }, { quoted: seloMeta });
 
 } else {
-// Usando resultado da Blackout API
+// Usando resultado da DENNYS API
 const videoTitle = video.title || 'Título desconhecido';
 const videoImage = video.image || 'https://i.postimg.cc/bv9D4BNY/The-Simpson.jpg';
 const videoDuration = video.timestamp || 'Duração desconhecida';
 const videoUrl = video.url || '';
 
 await client.sendMessage(from, {
-video: { url: `${BLACKOUT_API}/api/download/playvd?nome=${encodeURIComponent(videoUrl)}&apikey=${BLACKOUT_KEY}` },
+video: { url: `${DENNYS_API}/api/download/playvd?nome=${encodeURIComponent(videoUrl)}&apikey=${DENNYS_KEY}` },
 fileName: `${videoTitle}.mp4`,
 mimetype: "video/mp4",
 caption: `🎬 *${videoTitle}*\n⏱️ *Duração:* ${videoDuration}\n👤 *Pedido por:* ${pushname}\n\n_Woo hoo! Pipoca!_`,
@@ -13320,7 +13320,7 @@ renderLargerThumbnail: true
 }, { quoted: seloMeta });
 
 try {
-const toshiruzUrl = `${BLACKOUT_API}/api/ai/imagem/imagemAi?query=${encodeURIComponent(q)}&apikey=${BLACKOUT_KEY}`;
+const toshiruzUrl = `${DENNYS_API}/api/ai/imagem/imagemAi?query=${encodeURIComponent(q)}&apikey=${DENNYS_KEY}`;
 const response = await axios.get(toshiruzUrl, { responseType: 'arraybuffer' });
 const buffer = Buffer.from(response.data, 'binary');
 
@@ -13406,9 +13406,9 @@ if (body.toLowerCase().startsWith('oracao')) {
 const tema = body.slice(7).trim();
 if (!tema) return reply(`🙏 Digite o tema da oração.\nExemplo: oracao fé`);
 try {
-const respostaIA = await fetchJson(`${BLACKOUT_API}/api/ai/texto/gemini?query=Escreva uma oração sobre ${encodeURIComponent(tema)}&apikey=${BLACKOUT_KEY}`);
+const respostaIA = await fetchJson(`${DENNYS_API}/api/ai/texto/gemini?query=Escreva uma oração sobre ${encodeURIComponent(tema)}&apikey=${DENNYS_KEY}`);
 const oracao = respostaIA?.resposta || "🙏 Senhor, abençoe nossa caminhada com paz, fé e proteção divina.";
-const imagem = `${BLACKOUT_API}/api/pesquisa/pinterest?apikey=${BLACKOUT_KEY}&query=${encodeURIComponent("oração " + tema)}`;
+const imagem = `${DENNYS_API}/api/pesquisa/pinterest?apikey=${DENNYS_KEY}&query=${encodeURIComponent("oração " + tema)}`;
 await client.sendMessage(from, { image: { url: imagem },
 caption: `🙏 *Oração sobre ${tema}*\n\n${oracao}`
 }, { quoted: info });
@@ -13582,7 +13582,7 @@ tmpCardAluguelFunction(); // Quando o aluguel oficial do grupo (assinado), sem s
 tmpCardCortesiaAluguel(); // Quando o cartão cortesia do grupo acabar, ele irá notificar.
 
 msgupsrt().catch(async(e) => {
-if(JSON.stringify(e).includes(BLACKOUT_KEY)) {
+if(JSON.stringify(e).includes(DENNYS_KEY)) {
 return console.log("A api caiu ou não foi possivel executar esta ação.")
 } else if(String(e).includes("Erro: aborted")) {
 file = require.resolve("./connect.js")  
