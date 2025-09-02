@@ -1,0 +1,52 @@
+{
+  "catalogo": [
+    {
+      "id": 1,
+      "nome": "api 1.000 resques",
+      "preco": 2.50,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012359328.jpg"
+    },
+    {
+      "id": 2,
+      "nome": "api 2.000 resques",
+      "preco": 5.00,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012471752.jpg"
+    },
+    {
+      "id": 3,
+      "nome": "api 3.000 resques",
+      "preco": 7.50,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012540217.jpg"
+    },
+    {
+      "id": 4,
+      "nome": "api 4.000 resques",
+      "preco": 10.00,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012595819.jpg"
+    },
+    {
+      "id": 5,
+      "nome": "api 5.000 resques",
+      "preco": 12.50,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012659601.jpg"
+    },
+    {
+      "id": 6,
+      "nome": "api 10.000 resques",
+      "preco": 15.00,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012727986.jpg"
+    },
+    {
+      "id": 7,
+      "nome": "api 15.000 resques",
+      "preco": 17.50,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012799963.jpg"
+    },
+    {
+      "id": 8,
+      "nome": "api 20.000 resques",
+      "preco": 21.00,
+      "imagem": "https://api.dennys.niid.com.br/uploads/1754012869388.jpg"
+    }
+  ]
+}

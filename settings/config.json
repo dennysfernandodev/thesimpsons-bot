@@ -1,0 +1,28 @@
+{
+  "prefix": "/",
+  
+  "NomeDoBot": "The Simpsons BOT",
+  
+  "NickDono": "ObraboDEV",
+
+  "numerodono": "556194333182",
+  
+  "botNumber": "556191469023",
+  
+  "GEMINI_API_KEY": "AIzaSyAhZiJHdsbxlAJf-znKmAp3A8idInnns3Y",
+  "GEMINI_API_URL": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent",
+  "GEMINI_MODEL": "gemini-2.5-pro",
+  
+  "nomeLoja": "Dennys Api",
+  	
+  "donoloja": "556194333182",
+
+  "ID_CHANNEL": "120363397009791730@newsletter",
+  "NOME_CANAL": "☆DENNYS-OFICIAL☆",
+
+  "DENNYS_API": "https://api.dennys.niid.com.br",
+  "DENNYS_KEY": "dennysdev",
+
+  "Tosh": "Cole exatamente da forma que você copiar,o número é o seu principal, saiba que o número do bot é uma coisa, seu pessoal é ourra, você pode configurar tudo isso através do número do bot, mas tem que ser no WhatsApp do bot exato, digita o comando !configurar-bot : -----"
+}
+
