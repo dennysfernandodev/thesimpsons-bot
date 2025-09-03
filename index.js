@@ -747,7 +747,7 @@ const isContact = type == 'contactMessage'
 const isLocation = type == 'locationMessage'
 const isProduct = type == 'productMessage'
 const isMedia = (type === 'imageMessage' || type === 'videoMessage' || type === 'audioMessage' || type == "viewOnceMessage" || type == "viewOnceMessageV2")
-typeMessage = body.substr(0, 50).replace(/\n/g, '')
+typeMessage = (body || "").substr(0, 50).replace(/\n/g, '')
 if(isImage) typeMessage = "Image"
 else if(isVideo) typeMessage = "Video"
 else if(isAudio) typeMessage = "Audio"

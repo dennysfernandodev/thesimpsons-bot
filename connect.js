@@ -318,13 +318,13 @@ if (shouldReconnect) {
 break;
 
 case 'connecting':
-console.log(colors.magenta(`Blackout Reconectando / Iniciando - ${date} ${time}`));
+console.log(colors.magenta(`THE SIMPSONS Reconectando / Iniciando - ${date} ${time}`));
     break;
 
 case 'open':
 console.log(banner3.string)   
 console.log(banner2.string)  
-console.log(colors.green(`Blackout CONECTADO COM SUCESSO... 〕`))
+console.log(colors.green(`THE SIMPSONS BOT CONECTADO COM SUCESSO... 〕`))
 await dennys_oficial(client);
 await notificarReinicio(client);
 await client.sendPresenceUpdate("available")
